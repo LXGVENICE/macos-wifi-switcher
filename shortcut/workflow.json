@@ -1,0 +1,745 @@
+{
+  "WFWorkflowHasShortcutInputVariables": false,
+  "WFWorkflowMinimumClientVersionString": "900",
+  "WFWorkflowMinimumClientVersion": 900,
+  "WFWorkflowIcon": {
+    "WFWorkflowIconStartColor": 4271458815,
+    "WFWorkflowIconGlyphNumber": 61975
+  },
+  "WFWorkflowClientVersion": "5037.0.19",
+  "WFWorkflowOutputContentItemClasses": [],
+  "WFWorkflowHasOutputFallback": false,
+  "WFWorkflowActions": [
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.comment",
+      "WFWorkflowActionParameters": {
+        "WFCommentActionText": "Wi-Fi 状态变化时按本机配置设置网络。配置文件：下方目录中的 config.json（version 3）。支持 auto / manual，Shadowrocket 支持 keep / connect / disconnect。请先完成配置和权限设置，再添加“任何 Wi-Fi · 已加入或断开连接”自动化。",
+        "UUID": "8BC71656-8089-4AF7-815B-67D1F9133987"
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.gettext",
+      "WFWorkflowActionParameters": {
+        "WFTextActionText": "/Users/Shared/WiFiSwitchConfig",
+        "UUID": "77535401-18E1-43E3-8480-1583B868C12D"
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.setvariable",
+      "WFWorkflowActionParameters": {
+        "WFInput": {
+          "Value": {
+            "Type": "ActionOutput",
+            "OutputName": "文本",
+            "OutputUUID": "77535401-18E1-43E3-8480-1583B868C12D"
+          },
+          "WFSerializationType": "WFTextTokenAttachment"
+        },
+        "WFVariableName": "配置目录"
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.runshellscript",
+      "WFWorkflowActionParameters": {
+        "Shell": "/bin/sh",
+        "InputMode": "as arguments",
+        "UUID": "1E98EFBE-2845-4E65-87A4-E7EB3E2EE251",
+        "Script": "__SOURCE__:shell/prepare.sh",
+        "Input": {
+          "Value": {
+            "Type": "Variable",
+            "VariableName": "配置目录"
+          },
+          "WFSerializationType": "WFTextTokenAttachment"
+        },
+        "RunAsRoot": true
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.detect.text",
+      "WFWorkflowActionParameters": {
+        "WFInput": {
+          "Value": {
+            "Type": "ActionOutput",
+            "OutputUUID": "1E98EFBE-2845-4E65-87A4-E7EB3E2EE251",
+            "OutputName": "Shell脚本结果"
+          },
+          "WFSerializationType": "WFTextTokenAttachment"
+        },
+        "UUID": "1AE18552-7957-4146-B4B4-214ECDB2B062"
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.repeat.count",
+      "WFWorkflowActionParameters": {
+        "WFControlFlowMode": 0,
+        "UUID": "23648708-F16D-43DB-8554-3C17959E8254",
+        "WFRepeatCount": 3,
+        "GroupingIdentifier": "48F30156-477C-49AF-AB66-FB46F149438D"
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.list",
+      "WFWorkflowActionParameters": {
+        "WFItems": [
+          {
+            "WFItemType": 0,
+            "WFValue": {
+              "Value": {
+                "string": "￼",
+                "attachmentsByRange": {
+                  "{0, 1}": {
+                    "OutputName": "文本",
+                    "Type": "ActionOutput",
+                    "OutputUUID": "1AE18552-7957-4146-B4B4-214ECDB2B062"
+                  }
+                }
+              },
+              "WFSerializationType": "WFTextTokenString"
+            }
+          },
+          {
+            "WFItemType": 0,
+            "WFValue": {
+              "Value": {
+                "string": "￼",
+                "attachmentsByRange": {
+                  "{0, 1}": {
+                    "Type": "Variable",
+                    "VariableName": "Repeat Index"
+                  }
+                }
+              },
+              "WFSerializationType": "WFTextTokenString"
+            }
+          }
+        ],
+        "UUID": "4B5BB2BC-EF7C-4566-BD88-A5C794EC99BA"
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.runshellscript",
+      "WFWorkflowActionParameters": {
+        "Shell": "/bin/sh",
+        "InputMode": "as arguments",
+        "UUID": "982C63F4-A0EE-4EAA-A066-ADB92F1C1E11",
+        "Script": "__SOURCE__:shell/probe-first.sh",
+        "Input": {
+          "Value": {
+            "Type": "ActionOutput",
+            "OutputUUID": "4B5BB2BC-EF7C-4566-BD88-A5C794EC99BA",
+            "OutputName": "列表"
+          },
+          "WFSerializationType": "WFTextTokenAttachment"
+        },
+        "RunAsRoot": true
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.detect.text",
+      "WFWorkflowActionParameters": {
+        "WFInput": {
+          "Value": {
+            "Type": "ActionOutput",
+            "OutputUUID": "982C63F4-A0EE-4EAA-A066-ADB92F1C1E11",
+            "OutputName": "Shell脚本结果"
+          },
+          "WFSerializationType": "WFTextTokenAttachment"
+        },
+        "UUID": "EF8BBBC5-649D-4489-A172-94E306BC2E63"
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.conditional",
+      "WFWorkflowActionParameters": {
+        "WFControlFlowMode": 0,
+        "GroupingIdentifier": "D246553F-660E-4086-AC0E-274180E963ED",
+        "UUID": "D61D28D3-3201-42E0-957F-63D458647349",
+        "WFCondition": 4,
+        "WFConditionalActionString": "STALE",
+        "WFInput": {
+          "Type": "Variable",
+          "Variable": {
+            "Value": {
+              "Type": "ActionOutput",
+              "OutputUUID": "EF8BBBC5-649D-4489-A172-94E306BC2E63",
+              "OutputName": "文本"
+            },
+            "WFSerializationType": "WFTextTokenAttachment"
+          }
+        }
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.exit",
+      "WFWorkflowActionParameters": {
+        "UUID": "4B9DF59A-ABF1-45B1-8322-2C3463164050"
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.conditional",
+      "WFWorkflowActionParameters": {
+        "GroupingIdentifier": "D246553F-660E-4086-AC0E-274180E963ED",
+        "UUID": "FBEFFC28-AD2B-4855-8A79-506ABD15EEA0",
+        "WFControlFlowMode": 2
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.conditional",
+      "WFWorkflowActionParameters": {
+        "WFConditionalActionString": "CONNECTED",
+        "UUID": "5A3827B3-DDB1-4B88-8FA9-CEA05352BBE4",
+        "WFControlFlowMode": 0,
+        "WFCondition": 4,
+        "WFInput": {
+          "Type": "Variable",
+          "Variable": {
+            "Value": {
+              "OutputName": "文本",
+              "OutputUUID": "EF8BBBC5-649D-4489-A172-94E306BC2E63",
+              "Type": "ActionOutput"
+            },
+            "WFSerializationType": "WFTextTokenAttachment"
+          }
+        },
+        "GroupingIdentifier": "A63E68D0-AA5A-4481-88CA-BF6FD696F583"
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.getwifi",
+      "WFWorkflowActionParameters": {
+        "UUID": "A32E7FC9-EE3A-4201-8373-7453D2D1A95A"
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.conditional",
+      "WFWorkflowActionParameters": {
+        "UUID": "81449D0C-EEC9-4BA2-BB27-7B45EB9CE1C0",
+        "WFControlFlowMode": 1,
+        "GroupingIdentifier": "A63E68D0-AA5A-4481-88CA-BF6FD696F583"
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.nothing",
+      "WFWorkflowActionParameters": {
+        "UUID": "E1697D39-BA01-49F5-97DA-2C93AFA1BC40"
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.conditional",
+      "WFWorkflowActionParameters": {
+        "UUID": "313D9A3B-BF29-447C-A589-1322546ED36E",
+        "GroupingIdentifier": "A63E68D0-AA5A-4481-88CA-BF6FD696F583",
+        "WFControlFlowMode": 2
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.list",
+      "WFWorkflowActionParameters": {
+        "WFItems": [
+          {
+            "WFItemType": 0,
+            "WFValue": {
+              "Value": {
+                "string": "￼",
+                "attachmentsByRange": {
+                  "{0, 1}": {
+                    "Type": "ActionOutput",
+                    "OutputUUID": "1AE18552-7957-4146-B4B4-214ECDB2B062",
+                    "OutputName": "文本"
+                  }
+                }
+              },
+              "WFSerializationType": "WFTextTokenString"
+            }
+          },
+          {
+            "WFItemType": 0,
+            "WFValue": {
+              "Value": {
+                "string": "￼",
+                "attachmentsByRange": {
+                  "{0, 1}": {
+                    "OutputUUID": "313D9A3B-BF29-447C-A589-1322546ED36E",
+                    "Type": "ActionOutput",
+                    "OutputName": "如果结果"
+                  }
+                }
+              },
+              "WFSerializationType": "WFTextTokenString"
+            }
+          }
+        ],
+        "UUID": "A8D894D7-6A9C-4BAA-8334-44A5B7B55D12"
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.runshellscript",
+      "WFWorkflowActionParameters": {
+        "Shell": "/bin/sh",
+        "InputMode": "as arguments",
+        "UUID": "77ED9B2D-643F-4CEC-83A4-076CE7FC6742",
+        "Script": "__SOURCE__:shell/apply.sh",
+        "Input": {
+          "Value": {
+            "OutputName": "列表",
+            "OutputUUID": "A8D894D7-6A9C-4BAA-8334-44A5B7B55D12",
+            "Type": "ActionOutput"
+          },
+          "WFSerializationType": "WFTextTokenAttachment"
+        },
+        "RunAsRoot": true
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.detect.text",
+      "WFWorkflowActionParameters": {
+        "WFInput": {
+          "Value": {
+            "OutputUUID": "77ED9B2D-643F-4CEC-83A4-076CE7FC6742",
+            "Type": "ActionOutput",
+            "OutputName": "Shell脚本结果"
+          },
+          "WFSerializationType": "WFTextTokenAttachment"
+        },
+        "UUID": "FAF54586-28A3-4B11-B62D-CCAC2D90D6D6"
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.conditional",
+      "WFWorkflowActionParameters": {
+        "GroupingIdentifier": "804CC331-D51F-4883-9932-5413988CF31A",
+        "WFControlFlowMode": 0,
+        "WFInput": {
+          "Type": "Variable",
+          "Variable": {
+            "Value": {
+              "OutputUUID": "FAF54586-28A3-4B11-B62D-CCAC2D90D6D6",
+              "OutputName": "文本",
+              "Type": "ActionOutput"
+            },
+            "WFSerializationType": "WFTextTokenAttachment"
+          }
+        },
+        "WFCondition": 4,
+        "WFConditionalActionString": "STALE",
+        "UUID": "EB5778C3-B8DC-42D0-9D9E-454AFB7581AF"
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.exit",
+      "WFWorkflowActionParameters": {
+        "UUID": "53D5DC2D-DDEE-4AF5-B72A-D14B7EEA5902"
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.conditional",
+      "WFWorkflowActionParameters": {
+        "GroupingIdentifier": "804CC331-D51F-4883-9932-5413988CF31A",
+        "UUID": "C9069733-5277-4C30-B557-49A6A615B8F7",
+        "WFControlFlowMode": 2
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.runshellscript",
+      "WFWorkflowActionParameters": {
+        "Shell": "/bin/sh",
+        "InputMode": "as arguments",
+        "UUID": "506AB954-041D-47D2-B221-935D8F8135BA",
+        "Script": "__SOURCE__:shell/probe.sh",
+        "Input": {
+          "Value": {
+            "OutputUUID": "FAF54586-28A3-4B11-B62D-CCAC2D90D6D6",
+            "Type": "ActionOutput",
+            "OutputName": "文本"
+          },
+          "WFSerializationType": "WFTextTokenAttachment"
+        },
+        "RunAsRoot": true
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.detect.text",
+      "WFWorkflowActionParameters": {
+        "WFInput": {
+          "Value": {
+            "OutputName": "Shell脚本结果",
+            "OutputUUID": "506AB954-041D-47D2-B221-935D8F8135BA",
+            "Type": "ActionOutput"
+          },
+          "WFSerializationType": "WFTextTokenAttachment"
+        },
+        "UUID": "A5753EC5-D476-490A-A1FA-57926EEA06C1"
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.conditional",
+      "WFWorkflowActionParameters": {
+        "WFInput": {
+          "Type": "Variable",
+          "Variable": {
+            "Value": {
+              "OutputUUID": "A5753EC5-D476-490A-A1FA-57926EEA06C1",
+              "Type": "ActionOutput",
+              "OutputName": "文本"
+            },
+            "WFSerializationType": "WFTextTokenAttachment"
+          }
+        },
+        "WFConditionalActionString": "CONNECTED",
+        "WFControlFlowMode": 0,
+        "GroupingIdentifier": "EBA7D1BD-8C47-4C9C-A3E9-FA702C23FBF8",
+        "UUID": "15E75C4A-2795-4B04-A019-96D3FA1DEC96",
+        "WFCondition": 4
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.getwifi",
+      "WFWorkflowActionParameters": {
+        "UUID": "9AC33537-4973-4C22-8C87-A68DA39897E9"
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.conditional",
+      "WFWorkflowActionParameters": {
+        "WFControlFlowMode": 1,
+        "GroupingIdentifier": "EBA7D1BD-8C47-4C9C-A3E9-FA702C23FBF8",
+        "UUID": "77F09F15-A329-42DA-AF4A-1A4C2E8EDC43"
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.nothing",
+      "WFWorkflowActionParameters": {
+        "UUID": "CC1956F9-854F-49EC-A226-50868B9D9147"
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.conditional",
+      "WFWorkflowActionParameters": {
+        "WFControlFlowMode": 2,
+        "GroupingIdentifier": "EBA7D1BD-8C47-4C9C-A3E9-FA702C23FBF8",
+        "UUID": "0937445C-4BA8-4657-8B39-B85A8F768247"
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.list",
+      "WFWorkflowActionParameters": {
+        "WFItems": [
+          {
+            "WFItemType": 0,
+            "WFValue": {
+              "Value": {
+                "string": "￼",
+                "attachmentsByRange": {
+                  "{0, 1}": {
+                    "Type": "ActionOutput",
+                    "OutputName": "文本",
+                    "OutputUUID": "FAF54586-28A3-4B11-B62D-CCAC2D90D6D6"
+                  }
+                }
+              },
+              "WFSerializationType": "WFTextTokenString"
+            }
+          },
+          {
+            "WFItemType": 0,
+            "WFValue": {
+              "Value": {
+                "string": "￼",
+                "attachmentsByRange": {
+                  "{0, 1}": {
+                    "OutputName": "如果结果",
+                    "Type": "ActionOutput",
+                    "OutputUUID": "0937445C-4BA8-4657-8B39-B85A8F768247"
+                  }
+                }
+              },
+              "WFSerializationType": "WFTextTokenString"
+            }
+          }
+        ],
+        "UUID": "860050D4-7772-4630-A72B-9B37BFB7FADC"
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.runshellscript",
+      "WFWorkflowActionParameters": {
+        "Shell": "/bin/sh",
+        "InputMode": "as arguments",
+        "UUID": "EB0C0280-F77C-49BE-AB35-F0400628A8A6",
+        "Script": "__SOURCE__:shell/verify.sh",
+        "Input": {
+          "Value": {
+            "OutputName": "列表",
+            "Type": "ActionOutput",
+            "OutputUUID": "860050D4-7772-4630-A72B-9B37BFB7FADC"
+          },
+          "WFSerializationType": "WFTextTokenAttachment"
+        },
+        "RunAsRoot": true
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.detect.text",
+      "WFWorkflowActionParameters": {
+        "WFInput": {
+          "Value": {
+            "OutputUUID": "EB0C0280-F77C-49BE-AB35-F0400628A8A6",
+            "Type": "ActionOutput",
+            "OutputName": "Shell脚本结果"
+          },
+          "WFSerializationType": "WFTextTokenAttachment"
+        },
+        "UUID": "31429F63-91E4-4696-826E-4109A4E9BE74"
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.conditional",
+      "WFWorkflowActionParameters": {
+        "WFControlFlowMode": 0,
+        "GroupingIdentifier": "A19EA9C2-6AD8-4B28-A761-7FC00197B182",
+        "WFConditionalActionString": "RETRY",
+        "WFInput": {
+          "Type": "Variable",
+          "Variable": {
+            "Value": {
+              "OutputName": "文本",
+              "OutputUUID": "31429F63-91E4-4696-826E-4109A4E9BE74",
+              "Type": "ActionOutput"
+            },
+            "WFSerializationType": "WFTextTokenAttachment"
+          }
+        },
+        "UUID": "6BD2C4E6-FE1F-4EBC-B731-917FC26EF911",
+        "WFCondition": 4
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.conditional",
+      "WFWorkflowActionParameters": {
+        "UUID": "AC45312A-A1BF-43DE-8258-C31815F94F2C",
+        "WFControlFlowMode": 1,
+        "GroupingIdentifier": "A19EA9C2-6AD8-4B28-A761-7FC00197B182"
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.conditional",
+      "WFWorkflowActionParameters": {
+        "GroupingIdentifier": "84C27C13-CD55-478B-B2AB-EC2F1E62012A",
+        "UUID": "5EC7C2D2-09AD-48EC-B66C-AE09C25E1B1E",
+        "WFConditionalActionString": "APPLY_SHADOWROCKET",
+        "WFCondition": 4,
+        "WFControlFlowMode": 0,
+        "WFInput": {
+          "Type": "Variable",
+          "Variable": {
+            "Value": {
+              "OutputName": "文本",
+              "Type": "ActionOutput",
+              "OutputUUID": "31429F63-91E4-4696-826E-4109A4E9BE74"
+            },
+            "WFSerializationType": "WFTextTokenAttachment"
+          }
+        }
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.runshellscript",
+      "WFWorkflowActionParameters": {
+        "Shell": "/bin/sh",
+        "InputMode": "as arguments",
+        "UUID": "CA39F827-6EB2-4167-9987-9F0B25C3F093",
+        "Script": "__SOURCE__:shell/vpn-gate.sh",
+        "Input": {
+          "Value": {
+            "Type": "ActionOutput",
+            "OutputUUID": "FAF54586-28A3-4B11-B62D-CCAC2D90D6D6",
+            "OutputName": "文本"
+          },
+          "WFSerializationType": "WFTextTokenAttachment"
+        },
+        "RunAsRoot": true
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.detect.text",
+      "WFWorkflowActionParameters": {
+        "WFInput": {
+          "Value": {
+            "OutputName": "Shell脚本结果",
+            "Type": "ActionOutput",
+            "OutputUUID": "CA39F827-6EB2-4167-9987-9F0B25C3F093"
+          },
+          "WFSerializationType": "WFTextTokenAttachment"
+        },
+        "UUID": "4F7495B9-D82D-4126-B8E7-122BE9994859"
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.conditional",
+      "WFWorkflowActionParameters": {
+        "WFConditionalActionString": "DISCONNECT_SHADOWROCKET",
+        "WFInput": {
+          "Type": "Variable",
+          "Variable": {
+            "Value": {
+              "OutputName": "文本",
+              "Type": "ActionOutput",
+              "OutputUUID": "4F7495B9-D82D-4126-B8E7-122BE9994859"
+            },
+            "WFSerializationType": "WFTextTokenAttachment"
+          }
+        },
+        "WFControlFlowMode": 0,
+        "WFCondition": 4,
+        "GroupingIdentifier": "778DE89B-2050-4DCD-837A-774169414776",
+        "UUID": "C796DBF4-80FE-42AC-B12F-DB16DB5B21C5"
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "com.liguangming.Shadowrocket.StopVPNIntent",
+      "WFWorkflowActionParameters": {
+        "AppIntentDescriptor": {
+          "Name": "Shadowrocket",
+          "AppIntentIdentifier": "StopVPNIntent",
+          "BundleIdentifier": "com.liguangming.Shadowrocket",
+          "TeamIdentifier": "JBJ55K5C9X"
+        },
+        "UUID": "4A8953F2-BC46-4F98-B39A-B8F630E094B7"
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.conditional",
+      "WFWorkflowActionParameters": {
+        "UUID": "2673EF97-D0AE-4DF8-83D0-DFE963FA0D5F",
+        "WFControlFlowMode": 1,
+        "GroupingIdentifier": "778DE89B-2050-4DCD-837A-774169414776"
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.conditional",
+      "WFWorkflowActionParameters": {
+        "GroupingIdentifier": "C624122B-DE7A-4723-944C-F1FB00CE2E24",
+        "UUID": "5AE3E9F7-2905-41A8-85F2-2025DA0A2F7B",
+        "WFControlFlowMode": 0,
+        "WFInput": {
+          "Type": "Variable",
+          "Variable": {
+            "Value": {
+              "OutputName": "文本",
+              "OutputUUID": "4F7495B9-D82D-4126-B8E7-122BE9994859",
+              "Type": "ActionOutput"
+            },
+            "WFSerializationType": "WFTextTokenAttachment"
+          }
+        },
+        "WFConditionalActionString": "CONNECT_SHADOWROCKET",
+        "WFCondition": 4
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "com.liguangming.Shadowrocket.StartVPNIntent",
+      "WFWorkflowActionParameters": {
+        "AppIntentDescriptor": {
+          "Name": "Shadowrocket",
+          "BundleIdentifier": "com.liguangming.Shadowrocket",
+          "TeamIdentifier": "JBJ55K5C9X",
+          "AppIntentIdentifier": "StartVPNIntent"
+        },
+        "UUID": "D71B9191-490B-4425-8BA3-B2FADA63EBC8"
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.conditional",
+      "WFWorkflowActionParameters": {
+        "WFControlFlowMode": 2,
+        "GroupingIdentifier": "C624122B-DE7A-4723-944C-F1FB00CE2E24",
+        "UUID": "EF45982F-3B38-4845-97AA-E22010A3D7AF"
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.conditional",
+      "WFWorkflowActionParameters": {
+        "GroupingIdentifier": "778DE89B-2050-4DCD-837A-774169414776",
+        "UUID": "782AE15B-1437-40D6-B334-803D54C3E887",
+        "WFControlFlowMode": 2
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.conditional",
+      "WFWorkflowActionParameters": {
+        "UUID": "0FBA40B4-C3BD-4FE8-A9C5-8A41DE999163",
+        "WFControlFlowMode": 2,
+        "GroupingIdentifier": "84C27C13-CD55-478B-B2AB-EC2F1E62012A"
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.exit",
+      "WFWorkflowActionParameters": {
+        "UUID": "143AE228-5461-46A9-B1C0-D9B8ADDA769B"
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.conditional",
+      "WFWorkflowActionParameters": {
+        "GroupingIdentifier": "A19EA9C2-6AD8-4B28-A761-7FC00197B182",
+        "UUID": "B2ADA996-C103-4537-A790-28C07885C6F0",
+        "WFControlFlowMode": 2
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.repeat.count",
+      "WFWorkflowActionParameters": {
+        "UUID": "CDBBBF04-FF37-4BE4-BC29-308EEDBE43B4",
+        "GroupingIdentifier": "48F30156-477C-49AF-AB66-FB46F149438D",
+        "WFControlFlowMode": 2
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.runshellscript",
+      "WFWorkflowActionParameters": {
+        "Shell": "/bin/sh",
+        "InputMode": "as arguments",
+        "UUID": "47CC2696-FB11-40DA-88F5-D1826055A8E1",
+        "Script": "__SOURCE__:shell/final-error.sh",
+        "Input": {
+          "Value": {
+            "OutputUUID": "1AE18552-7957-4146-B4B4-214ECDB2B062",
+            "OutputName": "文本",
+            "Type": "ActionOutput"
+          },
+          "WFSerializationType": "WFTextTokenAttachment"
+        },
+        "RunAsRoot": true
+      }
+    }
+  ],
+  "WFWorkflowInputContentItemClasses": [
+    "WFAppContentItem",
+    "WFAppStoreAppContentItem",
+    "WFArticleContentItem",
+    "WFContactContentItem",
+    "WFDateContentItem",
+    "WFEmailAddressContentItem",
+    "WFFolderContentItem",
+    "WFGenericFileContentItem",
+    "WFImageContentItem",
+    "WFiTunesProductContentItem",
+    "WFLocationContentItem",
+    "WFDCMapsLinkContentItem",
+    "WFAVAssetContentItem",
+    "WFPDFContentItem",
+    "WFPhoneNumberContentItem",
+    "WFRichTextContentItem",
+    "WFSafariWebPageContentItem",
+    "WFStringContentItem",
+    "WFURLContentItem"
+  ],
+  "WFWorkflowImportQuestions": [],
+  "WFQuickActionSurfaces": [],
+  "WFWorkflowTypes": [
+    "WFWorkflowTypeShowInSearch"
+  ],
+  "WFWorkflowTriggers": [],
+  "WFWorkflowName": "WiFi Switch"
+}

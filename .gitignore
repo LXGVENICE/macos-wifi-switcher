@@ -1,0 +1,11 @@
+.DS_Store
+dist/
+config.json
+config.local.json
+current-run
+apply.lock
+.current-run.*
+__pycache__/
+*.pyc
+*.shortcut
+*.wflow

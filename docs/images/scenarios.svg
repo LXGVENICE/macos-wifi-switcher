@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="624" viewBox="0 0 1200 624" role="img" aria-labelledby="title desc">
+  <title id="title">WiFi Switch：按当前网络自动应用本机配置</title>
+  <desc id="desc">任意 Wi-Fi 状态变化后读取本机配置。家庭示例使用手动地址并断开 VPN；办公示例使用自动地址并连接 VPN；其他网络自动获取地址并保持 VPN；未连接时统一恢复自动设置。全部网络名为虚构示例。</desc>
+  <defs>
+    <style>
+      text { font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+      .title { font-size: 34px; font-weight: 700; fill: #10253f; }
+      .subtitle { font-size: 18px; fill: #50657c; }
+      .small { font-size: 15px; fill: #667991; }
+      .label { font-size: 18px; font-weight: 600; fill: #203d5c; }
+      .cardtitle { font-size: 23px; font-weight: 650; fill: #10253f; }
+      .body { font-size: 18px; fill: #334e68; }
+      .pill { font-size: 16px; font-weight: 600; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10Z" fill="#829ab1"/></marker>
+  </defs>
+  <rect width="1200" height="624" rx="24" fill="#f3f7fc"/>
+  <text x="44" y="65" class="title">同一个快捷指令，适应不同 Wi-Fi</text>
+  <text x="45" y="101" class="subtitle">共享流程 · 每台 Mac 独立配置 IP、网关、DNS 与 VPN 行为</text>
+  <rect x="44" y="136" width="300" height="60" rx="14" fill="#e3efff"/>
+  <text x="194" y="174" text-anchor="middle" class="label">任意 Wi-Fi 加入 / 断开</text>
+  <path d="M359 166H422" fill="none" stroke="#829ab1" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="438" y="136" width="315" height="60" rx="14" fill="#e3efff"/>
+  <text x="595" y="174" text-anchor="middle" class="label">读取当前状态与 config.json</text>
+  <path d="M767 166H830" fill="none" stroke="#829ab1" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="846" y="136" width="310" height="60" rx="14" fill="#e3efff"/>
+  <text x="1001" y="174" text-anchor="middle" class="label">匹配一条规则 → 应用并核验</text>
+  <g transform="translate(44 232)">
+    <rect width="354" height="236" rx="18" fill="#fff" stroke="#d9e5f3"/>
+    <rect width="354" height="7" rx="3" fill="#3676e8"/>
+    <text x="26" y="46" class="small">家庭 / 固定网络</text>
+    <text x="26" y="84" class="cardtitle">Home-Example</text>
+    <text x="26" y="124" class="body">手动 IPv4、掩码和网关</text>
+    <text x="26" y="154" class="body">指定 DNS</text>
+    <rect x="26" y="179" width="167" height="34" rx="17" fill="#eaf1ff"/>
+    <text x="109" y="202" text-anchor="middle" class="pill" fill="#245cb3">断开 Shadowrocket</text>
+  </g>
+  <g transform="translate(423 232)">
+    <rect width="354" height="236" rx="18" fill="#fff" stroke="#d9e5f3"/>
+    <rect width="354" height="7" rx="3" fill="#12a38e"/>
+    <text x="26" y="46" class="small">办公 / 自动网络</text>
+    <text x="26" y="84" class="cardtitle">Office-Example</text>
+    <text x="26" y="124" class="body">自动获取 IPv4 和网关</text>
+    <text x="26" y="154" class="body">自动 DNS</text>
+    <rect x="26" y="179" width="167" height="34" rx="17" fill="#e3f7f2"/>
+    <text x="109" y="202" text-anchor="middle" class="pill" fill="#167a69">连接 Shadowrocket</text>
+  </g>
+  <g transform="translate(802 232)">
+    <rect width="354" height="236" rx="18" fill="#fff" stroke="#d9e5f3"/>
+    <rect width="354" height="7" rx="3" fill="#8597ad"/>
+    <text x="26" y="46" class="small">酒店 / 咖啡馆 / 其他</text>
+    <text x="26" y="84" class="cardtitle">default.join</text>
+    <text x="26" y="124" class="body">自动获取 IPv4 和网关</text>
+    <text x="26" y="154" class="body">自动 DNS</text>
+    <rect x="26" y="179" width="167" height="34" rx="17" fill="#eef2f6"/>
+    <text x="109" y="202" text-anchor="middle" class="pill" fill="#4b627b">保持 VPN 状态</text>
+  </g>
+  <rect x="44" y="495" width="1112" height="65" rx="15" fill="#e6edf6"/>
+  <text x="70" y="535" class="label">未连接 Wi-Fi</text>
+  <text x="310" y="535" class="body">default.disconnect → IPv4、网关、DNS 自动 · VPN 保持</text>
+  <text x="45" y="596" class="small">虚构配置示例，可按需修改。切换网络以当前状态为准；所有模式的 IPv6 均为自动。</text>
+</svg>

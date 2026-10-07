@@ -1,0 +1,46 @@
+{
+  "_comment": {
+    "示例": "全部 SSID 和地址均为虚构。192.0.2.0/24 为文档示例地址，使用前必须替换。",
+    "default": "join 用于未匹配 Wi-Fi；disconnect 全局固定 auto + keep。",
+    "mode": {
+      "auto": "IPv4、网关、DNS 自动获取。",
+      "manual": "必填 ip、subnetMask、router、dns（非空 IPv4 数组）。"
+    },
+    "shadowrocket": "keep=保持；connect=连接；disconnect=断开。",
+    "说明": "SSID 精确匹配；每项仅支持 join，不继承默认字段。IPv6 始终自动。"
+  },
+  "version": 3,
+  "networkService": "Wi-Fi",
+  "default": {
+    "join": {
+      "mode": "auto",
+      "shadowrocket": "keep"
+    },
+    "disconnect": {
+      "mode": "auto",
+      "shadowrocket": "keep"
+    }
+  },
+  "networks": [
+    {
+      "ssid": "Home-Example",
+      "join": {
+        "mode": "manual",
+        "ip": "192.0.2.20",
+        "subnetMask": "255.255.255.0",
+        "router": "192.0.2.1",
+        "dns": [
+          "192.0.2.1"
+        ],
+        "shadowrocket": "disconnect"
+      }
+    },
+    {
+      "ssid": "Office-Example",
+      "join": {
+        "mode": "auto",
+        "shadowrocket": "connect"
+      }
+    }
+  ]
+}
